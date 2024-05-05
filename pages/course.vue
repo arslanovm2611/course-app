@@ -1,13 +1,12 @@
 <script setup>
-const { chapters } = useCourse();
+const { chapters, title } = useCourse();
 </script>
 
 <template>
   <div class="prose mb-12">
     <h1>
       <span class="font-medium">
-        Course:
-        <span class="font-bold">Mastering Nuxt</span>
+        <span class="font-bold">{{ title }}</span>
       </span>
     </h1>
   </div>
