@@ -35,9 +35,6 @@ const { chapters } = useCourse();
             <span class="text-gray-500">{{ index + 1 }}.</span
             >{{ lesson.title }}</NuxtLink
           >
-          <!-- <nuxt-link v-for="lesson in chapter.lessons" :to="lesson.path">{{
-              lesson.title
-            }}</nuxt-link> -->
         </ul>
       </div>
     </div>
