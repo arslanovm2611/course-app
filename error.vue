@@ -1,5 +1,6 @@
 <script setup>
 const error = useError();
+console.log("error handled");
 const handleError = () => {
   clearError({
     redirect:
