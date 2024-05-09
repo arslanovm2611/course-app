@@ -1,14 +1,6 @@
-export default async (chapterSlug: string, lessonSlug: string) => {
-  const { data, error } = useFetch(
+import { type LessonWithPath } from "~/types/course";
+
+export default async (chapterSlug: string, lessonSlug: string) =>
+  useLessonWithCache<LessonWithPath>(
     `/api/course/chapter/${chapterSlug}/lesson/${lessonSlug}`
   );
-
-  if (error.value) {
-    throw createError({
-      ...error.value,
-      statusMessage: `Cannot fetch lesson ${lessonSlug} in chapter ${chapterSlug}`,
-    });
-  }
-
-  return data;
-};

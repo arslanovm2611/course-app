@@ -1,6 +1,6 @@
 <script setup>
-const course = useCourse();
 const route = useRoute();
+const course = await useCourse();
 
 const lesson = await useLesson(
   route.params.chapterSlug,
@@ -9,10 +9,10 @@ const lesson = await useLesson(
 
 definePageMeta({
   middleware: [
-    function ({ params }, from) {
-      const course = useCourse();
-      const chapter = course.chapters.find(
-        (chapter) => chapter.slug === params.chapterSlug
+    async function (to, from) {
+      const course = await useCourse();
+      const chapter = course.value.chapters.find(
+        (chapter) => chapter.slug === to.params.chapterSlug
       );
 
       if (!chapter) {
@@ -25,7 +25,7 @@ definePageMeta({
       }
 
       const lesson = chapter.lessons.find(
-        (lesson) => lesson.slug === params.lessonSlug
+        (lesson) => lesson.slug === to.params.lessonSlug
       );
 
       if (!lesson) {
@@ -41,10 +41,15 @@ definePageMeta({
   ],
 });
 
-const chapter = course.chapters.find(
-  (chapter) => chapter.slug === route.params.chapterSlug
+const chapter = computed(() =>
+  course.value.chapters.find(
+    (chapter) => chapter.slug === route.params.chapterSlug
+  )
 );
-const title = ` ${lesson.value?.title} - ${chapter.title} `;
+
+const title = computed(
+  () => ` ${lesson.value?.title} - ${course.value.title} `
+);
 useHead({
   title,
 });
@@ -61,7 +66,6 @@ const isLessonCompleted = computed(() => {
 });
 
 const toggleComplete = () => {
-  console.log(progress.value);
   if (!progress.value[chapter.number - 1]) {
     progress.value[chapter.number - 1] = [];
   }
@@ -101,5 +105,3 @@ const toggleComplete = () => {
     />
   </div>
 </template>
-
-<style scoped></style>

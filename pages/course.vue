@@ -1,12 +1,12 @@
 <script setup>
-const { chapters, title } = useCourse();
+const course = await useCourse();
 </script>
 
 <template>
   <div>
     <div class="mb-4 flex justify-between items-center w-full">
       <h1 class="text-3xl font-bold">
-        {{ title }}
+        {{ course.title }}
       </h1>
 
       <UserCard />
@@ -20,7 +20,7 @@ const { chapters, title } = useCourse();
 
         <div>
           <ul
-            v-for="chapter in chapters"
+            v-for="chapter in course.chapters"
             :key="chapter.slug"
             class="space-y-1 mt-6 flex flex-col"
           >
@@ -30,7 +30,7 @@ const { chapters, title } = useCourse();
             <li class="ml-2 flex flex-col gap-2 text-sm">
               <NuxtLink
                 v-for="(lesson, index) in chapter.lessons"
-                :to="lesson.path"
+                :to="'/' + lesson.path"
                 :key="lesson.slug"
                 class="flex flex-row space-x-1 no-underline prose-sm font-normal py-1 px-4 -mx-4"
                 :class="{

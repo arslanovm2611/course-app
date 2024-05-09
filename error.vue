@@ -1,7 +1,7 @@
 <script setup>
 const error = useError();
-console.log("error handled");
 const handleError = () => {
+  console.error(error.value.message);
   clearError({
     redirect:
       "/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-vue-js-3",
