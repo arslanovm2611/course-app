@@ -82,20 +82,6 @@ const toggleComplete = () => {
 
     <h2 class="my-0">{{ lesson.title }}</h2>
     <div class="flex flex-col gap-4 mb-8 mt-2">
-      <div class="flex flex-row gap-4">
-        <NuxtLink
-          v-if="lesson.sourceUrl"
-          :to="lesson.sourceUrl"
-          class="text-gray-500"
-          >Download Source Code</NuxtLink
-        >
-        <NuxtLink
-          v-if="lesson.downloadUrl"
-          :to="lesson.downloadUrl"
-          class="text-gray-500"
-          >Download Video</NuxtLink
-        >
-      </div>
       <VideoPlayer v-if="lesson.videoId" :video="lesson" />
     </div>
     <p class="my-4">{{ lesson.text }}</p>
